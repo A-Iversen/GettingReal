@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GettingReal
 {
-    internal class Packaging : Product
+    internal class ProductPotential : Product
     {
 
     }

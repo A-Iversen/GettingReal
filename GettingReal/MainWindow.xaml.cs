@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GettingReal.ViewModel;
 
 namespace GettingReal
 {
@@ -19,6 +20,14 @@ namespace GettingReal
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.SaveProduct();
+            }
         }
     }
 }

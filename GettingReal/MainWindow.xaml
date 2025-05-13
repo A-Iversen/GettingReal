@@ -4,9 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GettingReal"
+        xmlns:vm="clr-namespace:GettingReal.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Product Manager" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Input Form -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Add New Product" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name -->
+                <Label Content="Name:" Grid.Row="0" Grid.Column="0" Margin="0,0,5,5"/>
+                <TextBox Text="{Binding ProductName}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <!-- Length -->
+                <Label Content="Length:" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5"/>
+                <TextBox Text="{Binding Length}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <!-- Height -->
+                <Label Content="Height:" Grid.Row="2" Grid.Column="0" Margin="0,0,5,5"/>
+                <TextBox Text="{Binding Height}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <!-- Width -->
+                <Label Content="Width:" Grid.Row="3" Grid.Column="0" Margin="0,0,5,5"/>
+                <TextBox Text="{Binding Width}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <!-- Fragile -->
+                <CheckBox Content="Fragile" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                          IsChecked="{Binding IsFragile}" Margin="0,5,0,5"/>
+
+                <!-- Save Button -->
+                <Button Content="Save Product" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                        Click="SaveButton_Click" Margin="0,5,0,0" Padding="10,5"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- Product List -->
+        <ListView Grid.Row="1" ItemsSource="{Binding Products}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                    <GridViewColumn Header="Length" DisplayMemberBinding="{Binding Length}" Width="80"/>
+                    <GridViewColumn Header="Height" DisplayMemberBinding="{Binding Height}" Width="80"/>
+                    <GridViewColumn Header="Width" DisplayMemberBinding="{Binding Width}" Width="80"/>
+                    <GridViewColumn Header="Fragile" DisplayMemberBinding="{Binding IsFragile}" Width="80"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

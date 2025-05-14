@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GettingReal.View.ProductView"
+﻿<UserControl x:Class="GettingReal.View.PackagingView"
            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,15 +7,13 @@
            mc:Ignorable="d" 
            d:DesignHeight="450" d:DesignWidth="700"
            Background="Transparent">
-           
-    
-    
+
+    <!--Window Highlight-->
     <Border CornerRadius="10" BorderThickness="2">
-        
 
 
         <Grid>
-           
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="250"/>
@@ -26,9 +24,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!--Vesntre menu-->
+            <!--Venstre menu-->
             <Border Grid.Column="0" Grid.Row="1">
-
                 <Border CornerRadius="0,0,0,10">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
@@ -39,10 +36,8 @@
                 </Border>
             </Border>
 
-
             <!--Top menu-->
             <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-
                 <Border CornerRadius="10,10,0,0">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
@@ -53,28 +48,13 @@
                 </Border>
             </Border>
 
-
             <!--Højre menu-->
             <Border Grid.Column="1" Grid.Row="1">
-
-                <Border CornerRadius="0,0,10,0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
-                            <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                </Border>
-
-
+                <Button Content="Produkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="40" Margin="10,10,0,0" Click="Button_Click" />
             </Border>
 
+            <!-- "Yeet" Test knap -->
+            <Button Grid.Column="1" Grid.Row="1" Content="Yeet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="40" Margin="140,10,0,0" Click="Button_Click_1" />
         </Grid>
-
     </Border>
-       
-    
 </UserControl>
-
-    
-

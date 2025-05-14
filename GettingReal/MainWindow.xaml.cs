@@ -1,33 +1,29 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using GettingReal.Repository;
 using GettingReal.ViewModel;
+using GettingReal.View;
 
 namespace GettingReal
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel _view;
+
         public MainWindow()
         {
             InitializeComponent();
+            _view = new MainViewModel(new ProductRepository());
+            DataContext = _view;
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainViewModel viewModel)
-            {
-                viewModel.SaveProduct();
-            }
+            _view.CurrentView = new PackagingView();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            _view.CurrentView = new ProductView();
         }
     }
 }

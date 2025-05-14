@@ -1,77 +1,77 @@
 ﻿<Window x:Class="GettingReal.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GettingReal"
-        xmlns:vm="clr-namespace:GettingReal.ViewModel"
-        mc:Ignorable="d"
-        Title="Product Manager" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
-    
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:GettingReal.View" xmlns:gettingreal="clr-namespace:GettingReal" d:DataContext="{d:DesignInstance Type=gettingreal:MainViewModel}"
+        mc:Ignorable="d" 
+        Title="MainWindow" Height="450" Width="800"
+        Background="Transparent">
 
-        <!-- Input Form -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Add New Product" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-            
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+    <!--Window Highlight-->
+    <Border CornerRadius="10" BorderThickness="2">
+        <Border.BorderBrush>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+                <GradientStop Color="{StaticResource WindowHightlightColor1}" Offset="0.9"/>
+                <GradientStop Color="{StaticResource WindowHightlightColor2}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
 
-                <!-- Name -->
-                <Label Content="Name:" Grid.Row="0" Grid.Column="0" Margin="0,0,5,5"/>
-                <TextBox Text="{Binding ProductName}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- Length -->
-                <Label Content="Length:" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5"/>
-                <TextBox Text="{Binding Length}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <!-- Height -->
-                <Label Content="Height:" Grid.Row="2" Grid.Column="0" Margin="0,0,5,5"/>
-                <TextBox Text="{Binding Height}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+            <!--Top Menu Section-->
+            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+                <Border CornerRadius="10,10,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
+                            <GradientStop Color="{StaticResource TopPanel1}" Offset="0"/>
+                            <GradientStop Color="{StaticResource TopPanel2}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
 
-                <!-- Width -->
-                <Label Content="Width:" Grid.Row="3" Grid.Column="0" Margin="0,0,5,5"/>
-                <TextBox Text="{Binding Width}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+                    <!-- Buttons for switching views -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
+                        <Button Content="Inventory" Command="{Binding ShowInventoryCommand}" Style="{StaticResource NavButtonStyle}" Click="Button_Click_1" Height="31" Width="80" />
+                        <Button Content="Packaging" Command="{Binding ShowPackagingCommand}" Style="{StaticResource NavButtonStyle}" Click="Button_Click" Height="31" Width="85" />
+                    </StackPanel>
+                </Border>
+            </Border>
 
-                <!-- Fragile -->
-                <CheckBox Content="Fragile" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                          IsChecked="{Binding IsFragile}" Margin="0,5,0,5"/>
+            <!--Left Menu Section-->
+            <Border Grid.Column="0" Grid.Row="1">
+                <Border CornerRadius="0,0,0,10">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
+                            <GradientStop Color="{StaticResource LeftPanel1}" Offset="0"/>
+                            <GradientStop Color="{StaticResource LeftPanel2}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Border>
 
-                <!-- Save Button -->
-                <Button Content="Save Product" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                        Click="SaveButton_Click" Margin="0,5,0,0" Padding="10,5"/>
-            </Grid>
-        </StackPanel>
+            <!--Right Menu Section-->
+            <Border Grid.Column="1" Grid.Row="1">
+                <Border CornerRadius="0,0,10,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
+                            <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
+                            <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Border>
 
-        <!-- Product List -->
-        <ListView Grid.Row="1" ItemsSource="{Binding Products}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                    <GridViewColumn Header="Length" DisplayMemberBinding="{Binding Length}" Width="80"/>
-                    <GridViewColumn Header="Height" DisplayMemberBinding="{Binding Height}" Width="80"/>
-                    <GridViewColumn Header="Width" DisplayMemberBinding="{Binding Width}" Width="80"/>
-                    <GridViewColumn Header="Fragile" DisplayMemberBinding="{Binding IsFragile}" Width="80"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+            <!-- Content Section -->
+            <ContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding CurrentView}" />
+        </Grid>
+    </Border>
 </Window>

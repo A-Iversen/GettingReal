@@ -2,133 +2,166 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
+using System.Windows.Input;
 using GettingReal.Model;
 using GettingReal.Repository;
+using GettingReal.View;
+using GettingReal.ViewModel;
+namespace GettingReal;
 
-namespace GettingReal.ViewModel
+
+public class MainViewModel : INotifyPropertyChanged
 {
-    public class MainViewModel : INotifyPropertyChanged
-    {
-        private readonly IProductRepository _repository;
-        private string _productName;
-        private double _length;
-        private double _height;
-        private double _width;
-        private bool _isFragile;
-        private List<Product> _products;
+    private readonly IProductRepository _repository;
+    private string _productName;
+    private double _length;
+    private double _height;
+    private double _width;
+    private bool _isFragile;
+    private List<Product> _products;
+    private readonly ProductView _productView = new ProductView();
+    private readonly PackagingView _packagingView = new PackagingView();
 
-        public List<Product> Products
+    public MainViewModel(IProductRepository productRepository)
+    {
+        _repository = productRepository;
+        Products = new List<Product>(_repository.GetAllProducts());
+
+        ShowInventoryCommand = new RelayCommand(() =>
         {
-            get => _products;
-            private set
+            CurrentView = _productView;
+        });
+
+        ShowPackagingCommand = new RelayCommand(() =>
+        {
+            CurrentView = _packagingView;
+        });
+        //Sætter view til inventory ved start
+        CurrentView = _productView;
+    }
+    private UserControl _currentView;
+    public UserControl CurrentView
+    {
+        get => _currentView;
+        set
+        {
+            _currentView = value;
+            OnPropertyChanged();
+        }
+    }
+
+
+    public List<Product> Products
+    {
+        get => _products;
+        private set
+        {
+            _products = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string ProductName
+    {
+        get => _productName;
+        set
+        {
+            if (_productName != value)
             {
-                _products = value;
+                _productName = value;
                 OnPropertyChanged();
             }
         }
+    }
 
-        public string ProductName
+    public double Length
+    {
+        get => _length;
+        set
         {
-            get => _productName;
-            set
+            if (_length != value)
             {
-                if (_productName != value)
-                {
-                    _productName = value;
-                    OnPropertyChanged();
-                }
+                _length = value;
+                OnPropertyChanged();
             }
-        }
-
-        public double Length
-        {
-            get => _length;
-            set
-            {
-                if (_length != value)
-                {
-                    _length = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public double Height
-        {
-            get => _height;
-            set
-            {
-                if (_height != value)
-                {
-                    _height = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public double Width
-        {
-            get => _width;
-            set
-            {
-                if (_width != value)
-                {
-                    _width = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public bool IsFragile
-        {
-            get => _isFragile;
-            set
-            {
-                if (_isFragile != value)
-                {
-                    _isFragile = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        // Public parameterless constructor
-        public MainViewModel()
-        {
-            _repository = new ProductRepository();
-            Products = new List<Product>(_repository.GetAllProducts());
-        }
-
-        public void SaveProduct()
-        {
-            var product = new Product
-            {
-                Name = ProductName,
-                Length = Length,
-                Height = Height,
-                Width = Width,
-                IsFragile = IsFragile
-            };
-
-            _repository.AddProduct(product);
-            Products = new List<Product>(_repository.GetAllProducts());
-            ClearInputFields();
-        }
-
-        private void ClearInputFields()
-        {
-            ProductName = string.Empty;
-            Length = 0;
-            Height = 0;
-            Width = 0;
-            IsFragile = false;
         }
     }
-} 
+
+    public double Height
+    {
+        get => _height;
+        set
+        {
+            if (_height != value)
+            {
+                _height = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public double Width
+    {
+        get => _width;
+        set
+        {
+            if (_width != value)
+            {
+                _width = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool IsFragile
+    {
+        get => _isFragile;
+        set
+        {
+            if (_isFragile != value)
+            {
+                _isFragile = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    // Public parameterless constructor
+    
+
+    public void SaveProduct()
+    {
+        var product = new Product
+        {
+            Name = ProductName,
+            Length = Length,
+            Height = Height,
+            Width = Width,
+            IsFragile = IsFragile
+        };
+
+        _repository.AddProduct(product);
+        Products = new List<Product>(_repository.GetAllProducts());
+        ClearInputFields();
+    }
+
+    private void ClearInputFields()
+    {
+        ProductName = string.Empty;
+        Length = 0;
+        Height = 0;
+        Width = 0;
+        IsFragile = false;
+    }
+    public ICommand ShowInventoryCommand { get; }
+    public ICommand ShowPackagingCommand { get; }
+
+}

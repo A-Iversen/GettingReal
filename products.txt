@@ -2,3 +2,4 @@ dasdw|32|32|12|True
 |0|0|0|False
 |0|0|0|False
 |56|321|312|False
+Nej|0|0|0|False

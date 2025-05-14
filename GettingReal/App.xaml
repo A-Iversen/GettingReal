@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:GettingReal"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary> <!--Enables resource dictionaries from the Styles folder to be used-->
-            <ResourceDictionary.MergedDictionaries> <!--Merges Resource dictionaries, allowing for modular additions later on-->
+        <ResourceDictionary> <!--Enables resource repositories from the Styles folder to be used-->
+            <ResourceDictionary.MergedDictionaries> <!--Merges Resource repositories, allowing for modular additions later on-->
                 
                 <ResourceDictionary Source="Styles/UIColors.xaml"/>
                 

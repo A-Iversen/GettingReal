@@ -6,9 +6,19 @@
         xmlns:local="clr-namespace:GettingReal.View" xmlns:gettingreal="clr-namespace:GettingReal" d:DataContext="{d:DesignInstance Type=gettingreal:MainViewModel}"
         mc:Ignorable="d" 
         Title="MainWindow" Height="450" Width="800"
-        Background="Transparent">
+        Background="Transparent"
+        WindowStyle="SingleBorderWindow">
+    
+    <!--Fjerner windows topbar med minimize, close og maximize (Skal laves med custom UI)-->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      ResizeBorderThickness="2"
+                      UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+    
 
-    <!--Window Highlight-->
+
+        <!--Window Highlight-->
     <Border CornerRadius="10" BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >

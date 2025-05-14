@@ -50,7 +50,7 @@
 
                 <Border CornerRadius="10,10,0,0">
                     <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
                             <GradientStop Color="{StaticResource TopPanel1}" Offset="0"/>
                             <GradientStop Color="{StaticResource TopPanel2}" Offset="1"/>
                         </LinearGradientBrush>
@@ -64,7 +64,7 @@
 
                 <Border CornerRadius="0,0,10,0">
                     <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
                             <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
                             <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
                         </LinearGradientBrush>

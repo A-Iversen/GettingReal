@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using GettingReal.Model;
 
 namespace GettingReal.Repository
@@ -32,32 +33,32 @@ namespace GettingReal.Repository
             {
                 if (File.Exists(_filePath))
                 {
-                    _products = File.ReadAllLines(_filePath)
-                        .Select(Product.FromString)
-                        .ToList();
+                    string json = File.ReadAllText(_filePath);
+                    _products = JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
                 }
             }
             catch (Exception ex)
             {
-                // Log the error or handle it appropriately
                 Console.WriteLine($"Error loading products: {ex.Message}");
                 _products = new List<Product>();
             }
         }
+
 
         // Save products to file
         private void SaveProducts()
         {
             try
             {
-                File.WriteAllLines(_filePath, _products.Select(p => p.ToString()));
+                string json = JsonSerializer.Serialize(_products, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(_filePath, json);
             }
             catch (Exception ex)
             {
-                // Log the error or handle it appropriately
                 Console.WriteLine($"Error saving products: {ex.Message}");
             }
         }
+
 
         // IProductRepository
         public void AddProduct(Product product)

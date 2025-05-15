@@ -4,17 +4,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:GettingReal.View" xmlns:gettingreal="clr-namespace:GettingReal" d:DataContext="{d:DesignInstance Type=gettingreal:MainViewModel}"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d" 
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" 
+        Height="450" Width="700"
+        MinHeight="450" MinWidth="700"
+        
+        WindowStyle="None"
         Background="Transparent"
-        WindowStyle="SingleBorderWindow">
+        AllowsTransparency="True"
+        >
     
-    <!--Fjerner windows topbar med minimize, close og maximize (Skal laves med custom UI)-->
-    <WindowChrome.WindowChrome>
+    <!--Fjerner windows topbar med minimize, close og maximize (Skal laves med custom UI senere)-->
+    <!--<WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
                       ResizeBorderThickness="2"
                       UseAeroCaptionButtons="False"/>
-    </WindowChrome.WindowChrome>
+    </WindowChrome.WindowChrome>-->
     
 
 
@@ -26,6 +32,7 @@
                 <GradientStop Color="{StaticResource WindowHightlightColor2}" Offset="1"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
+        
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -38,50 +45,90 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!--Top Menu Section-->
-            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-                <Border CornerRadius="10,10,0,0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
-                            <GradientStop Color="{StaticResource TopPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource TopPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
+            <!--Top Section-->
+            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                    CornerRadius="10,10,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
+                        <GradientStop Color="{StaticResource TopPanel1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource TopPanel2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            
+                <!--Navigation Menu-->
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Style="{StaticResource menuButton}"
+                                    Tag="{StaticResource IconBaseColor}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="cubes" Style="{StaticResource menuButtonIcon}"/>
+                        </StackPanel>
+                    </RadioButton>
 
-                    <!-- Buttons for switching views -->
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
-                        <Button Content="Inventory" Command="{Binding ShowInventoryCommand}" Style="{StaticResource NavButtonStyle}" Click="Button_Click_1" Height="31" Width="80" />
-                        <Button Content="Packaging" Command="{Binding ShowPackagingCommand}" Style="{StaticResource NavButtonStyle}" Click="Button_Click" Height="31" Width="85" />
+                    <RadioButton Style="{StaticResource menuButton}"
+                                    Tag="{StaticResource IconBaseColor}">
+                        <StackPanel>
+                            <fa:IconImage Icon="BoxesPacking" Style="{StaticResource menuButtonIcon}"/>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+
+            </Border>
+
+            <!--Topbar-->
+            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--ControlBar-->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="-445,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter">
+
                     </StackPanel>
-                </Border>
+                    
+                </Grid>
             </Border>
 
-            <!--Left Menu Section-->
-            <Border Grid.Column="0" Grid.Row="1">
-                <Border CornerRadius="0,0,0,10">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
-                            <GradientStop Color="{StaticResource LeftPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource LeftPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                </Border>
+            
+            <!--Left Section-->
+            <Border Grid.Column="0" Grid.Row="1"
+                    CornerRadius="0,0,0,10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
+                        <GradientStop Color="{StaticResource LeftPanel1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource LeftPanel2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
             </Border>
 
-            <!--Right Menu Section-->
-            <Border Grid.Column="1" Grid.Row="1">
-                <Border CornerRadius="0,0,10,0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
-                            <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                </Border>
+            <!--Right Section-->
+            <Border Grid.Column="1" Grid.Row="1"
+                    CornerRadius="0,0,10,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
+                        <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
+                
             </Border>
-
-            <!-- Content Section -->
-            <ContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding CurrentView}" />
+            
         </Grid>
+        
     </Border>
+    
 </Window>
+    
+    
+    
+    

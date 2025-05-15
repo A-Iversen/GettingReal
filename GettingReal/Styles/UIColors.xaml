@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:GettingReal.View">
-
+   
     <!--Border Highlight Gradient-->
     <Color x:Key="WindowHightlightColor1">#2C87AD</Color>
     <Color x:Key="WindowHightlightColor2">#1B2838</Color>
@@ -18,6 +18,21 @@
     <!--RightPanel-->
     <Color x:Key="RightPanel1">#16212E</Color>
     <Color x:Key="RightPanel2">#1B2838</Color>
+    
+    <!--ButtonColor-->
+    <SolidColorBrush x:Key="IconBaseColor" Color="White" />
+    <SolidColorBrush x:Key="MouseOverColor" Color="#385B70" />
+    <SolidColorBrush x:Key="SelectedColor" Color="#0A0C14" />
+    
+    <SolidColorBrush x:Key="Color4" Color="#385B70" />
+    <SolidColorBrush x:Key="Color5" Color="Black" />
+
+
+
+
+
+
+
 
     <!-- Navigation Button Style -->
     <Style x:Key="NavButtonStyle" TargetType="Button">

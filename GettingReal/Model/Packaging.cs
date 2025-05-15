@@ -8,5 +8,6 @@ namespace GettingReal.Model
 {
     public class Packaging : Product
     {
+        
     }
 }

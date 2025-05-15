@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization; // Tilføjet af PU mht Packaging
 
 namespace GettingReal.Model
 {
@@ -14,6 +15,22 @@ namespace GettingReal.Model
         public double Height { get; set; }
         public double Width { get; set; }
         public bool IsFragile { get; set; }
+
+        // Tilføjet af PU mht Packaging
+        /// <summary>
+        /// Fragility buffer in cm (e.g. 0.5 or 1.0)
+        /// </summary>
+        public double FragilityBuffer { get; set; }
+
+        // Tilføjet af PU mht Packaging
+        /// <summary>
+        /// Total dimensions including buffer on each side
+        /// </summary>
+        [JsonIgnore]
+        public (double L, double H, double W) DimensionsWithBuffer
+            => (Length + FragilityBuffer * 2,
+                Height + FragilityBuffer * 2,
+                Width + FragilityBuffer * 2);
 
         // Constructor - Automatic
         public Product()

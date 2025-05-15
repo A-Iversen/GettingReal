@@ -15,9 +15,9 @@ namespace GettingReal.Repository
         // Constructor - initializes the repository with a file path
         public ProductRepository()
         {
-            // Use a simple, fixed path in the user's documents folder
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            _filePath = Path.Combine(documentsPath, "GettingReal", "products.txt");
+            // Save File
+string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+_filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
             
             // Ensure the directory exists
             Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
@@ -77,5 +77,19 @@ namespace GettingReal.Repository
             _products.Clear();
             SaveProducts();
         }
+
+        public void EditProduct(string productName, Product updatedProduct)
+        {
+            var product = _products.FirstOrDefault(p => p.Name == productName);
+            if (product != null)
+            {
+                product.Name = updatedProduct.Name;
+                product.Length = updatedProduct.Length;
+                product.Height = updatedProduct.Height;
+                product.Width = updatedProduct.Width;
+                product.IsFragile = updatedProduct.IsFragile;
+                SaveProducts();
+            }
+        }
     }
-} 
+}

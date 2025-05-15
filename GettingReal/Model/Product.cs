@@ -27,17 +27,5 @@ namespace GettingReal.Model
         }
 
         // Parse from string (for loading from file)
-        public static Product FromString(string line)
-        {
-            var parts = line.Split('|');
-            return new Product
-            {
-                Name = parts[0],
-                Length = double.Parse(parts[1]),
-                Height = double.Parse(parts[2]),
-                Width = double.Parse(parts[3]),
-                IsFragile = bool.Parse(parts[4])
-            };
-        }
     }
 }

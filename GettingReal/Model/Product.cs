@@ -25,7 +25,6 @@ namespace GettingReal.Model
         {
             return $"{Name}|{Length}|{Height}|{Width}|{IsFragile}";
         }
-
-        // Parse from string (for loading from file)
+        
     }
 }

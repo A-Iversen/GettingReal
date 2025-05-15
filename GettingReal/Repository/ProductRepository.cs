@@ -91,5 +91,15 @@ _filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
                 SaveProducts();
             }
         }
+
+        public void RemoveProduct(string productName)
+        {
+            var product = _products.FirstOrDefault(p => p.Name == productName);
+            if (product != null)
+            {
+                _products.Remove(product);
+                SaveProducts();
+            }
+        }
     }
 }

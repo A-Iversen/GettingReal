@@ -64,6 +64,16 @@
                             <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
+                    <StackPanel Margin="10">
+                        <Button Content="Remove Product" 
+                                Command="{Binding RemoveProductCommand}" 
+                                CommandParameter="{Binding SelectedProductName}" 
+                                Width="120" Height="30"/>
+                        <Button Content="Save Changes" 
+                                Command="{Binding EditProductCommand}" 
+                                CommandParameter="{Binding SelectedProduct}" 
+                                Width="120" Height="30"/>
+                    </StackPanel>
                 </Border>
 
 
@@ -75,6 +85,3 @@
        
     
 </UserControl>
-
-    
-

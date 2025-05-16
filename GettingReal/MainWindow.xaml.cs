@@ -9,7 +9,7 @@ namespace GettingReal
 {
     public partial class MainWindow : Window
     {
-        private ViewModelBase _view;
+        private MainViewModel _view;
 
         //Kode til at flytte Title Bar og Resize vindue.
         //Stjæler Windows OS'ets indbyggede funktion til at tracke en application vindue resolution.

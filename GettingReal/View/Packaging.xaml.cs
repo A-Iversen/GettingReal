@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace GettingReal.View
 {
     /// <summary>
-    /// Interaction logic for ProductView.xaml
+    /// Interaction logic for Packaging.xaml
     /// </summary>
-    public partial class PackagingView : UserControl
+    public partial class Packaging : UserControl
     {
-        public PackagingView()
+        public Packaging()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

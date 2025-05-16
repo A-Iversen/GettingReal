@@ -8,7 +8,7 @@
             <ResourceDictionary.MergedDictionaries> <!--Merges Resource repositories, allowing for modular additions later on-->
                 
                 <ResourceDictionary Source="Styles/UIColors.xaml"/>
-                <ResourceDictionary Source="Styles/MenuButton.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyles.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

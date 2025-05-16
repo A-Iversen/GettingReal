@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:local="clr-namespace:GettingReal.View" xmlns:gettingreal="clr-namespace:GettingReal" d:DataContext="{d:DesignInstance Type=gettingreal:MainViewModel}"
+        xmlns:local="clr-namespace:GettingReal.View" xmlns:gettingreal="clr-namespace:GettingReal" d:DataContext="{d:DesignInstance Type=gettingreal:ViewModelBase}"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d" 
         Title="MainWindow" 
@@ -15,17 +15,8 @@
         AllowsTransparency="True"
         >
     
-    <!--Fjerner windows topbar med minimize, close og maximize (Skal laves med custom UI senere)-->
-    <!--<WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0"
-                      ResizeBorderThickness="2"
-                      UseAeroCaptionButtons="False"/>
-    </WindowChrome.WindowChrome>-->
-    
-
-
-        <!--Window Highlight-->
-    <Border CornerRadius="10" BorderThickness="2">
+        <!--Window BackHighlight-->
+    <Border CornerRadius="10" BorderThickness="2" >
         <Border.BorderBrush>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
                 <GradientStop Color="{StaticResource WindowHightlightColor1}" Offset="0.9"/>
@@ -47,7 +38,7 @@
 
             <!--Top Section-->
             <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-                    CornerRadius="10,10,0,0">
+                    CornerRadius="10,10,0,0" Margin="0,0,0,-1">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
                         <GradientStop Color="{StaticResource TopPanel1}" Offset="0"/>
@@ -74,29 +65,6 @@
 
             </Border>
 
-            <!--Topbar-->
-            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    
-                    <!--ControlBar-->
-                    <StackPanel x:Name="pnlControlBar"
-                                Grid.Row="0"
-                                Orientation="Horizontal"
-                                FlowDirection="RightToLeft"
-                                Background="Transparent"
-                                Margin="-445,0,5,0"
-                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
-                                MouseEnter="pnlControlBar_MouseEnter">
-
-                    </StackPanel>
-                    
-                </Grid>
-            </Border>
-
             
             <!--Left Section-->
             <Border Grid.Column="0" Grid.Row="1"
@@ -110,6 +78,7 @@
                 
             </Border>
 
+            
             <!--Right Section-->
             <Border Grid.Column="1" Grid.Row="1"
                     CornerRadius="0,0,10,0">
@@ -120,6 +89,61 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 
+                
+            </Border>
+            
+            
+            
+            <!--Topbar-->
+            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--ControlBar-->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter">
+                        
+                        <!--Close Button-->
+                        <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource BottonCloseColor}"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <!--Maximize Button-->
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource BottonMaximizeColor}"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <!--Minimize Button-->
+                        <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource BottonMinimizeColor}"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                    </StackPanel>
+
+
+                    <!--Content Section / Child Views-->
+                    <ContentControl Content=""
+                                    Grid.Row="2"
+                                    Margin="25"/>
+
+
+                </Grid>
                 
             </Border>
             

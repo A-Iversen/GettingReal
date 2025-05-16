@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
+    <!--Menu button style-->
     <Style x:Key="menuButton" TargetType="RadioButton">
        
         <!--Button Rest-State-->
@@ -26,8 +27,8 @@
             </Setter.Value>
         </Setter>
         
-        <!--Mouse Over-State-->
         <Style.Triggers>
+            <!--Mouse Over-State-->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Margin" Value="0,0,0,1.5"/>
                 <Setter Property="Background" Value="{StaticResource MouseOverColor}"/> <!--Farve til Icon-->
@@ -35,7 +36,7 @@
                 <Setter Property="BorderBrush" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
             </Trigger>
         
-        <!--Button Selected-State-->
+            <!--Button Selected-State-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0,0,0,0"/>
                 <Setter Property="Background" Value="{StaticResource SelectedColor}"/> <!--Farve til Icon-->
@@ -52,19 +53,54 @@
         <Setter Property="Width" Value="35"/>
         <Setter Property="Height" Value="35"/>
         <Setter Property="Margin" Value="17,35,0,0"/>
-
-
     </Style>
     
-    <!--Menu button text (IKKE I BRUG) -->
+    <!--Menu button text (IKKE I BRUG)
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="13,5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>-->
+
+
+
+    
+    <!--Control bar button-->
+    <Style x:Key="controlButton" TargetType="Button">
+
+        <!--Button Rest-State-->
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Margin" Value="5,5,0,0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource IconBaseColor}"/> <!--Farve til Icon-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <!--Mouse Over-State-->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource MouseOverColor}"/>
+                <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 
+    <!--Menu button icon-->
+    <Style x:Key="controlButtonIcon" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+        <Setter Property="Width" Value="9"/>
+        <Setter Property="Height" Value="9"/>
+    </Style>
 
 </ResourceDictionary>
     

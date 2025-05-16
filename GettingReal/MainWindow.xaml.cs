@@ -9,39 +9,43 @@ namespace GettingReal
 {
     public partial class MainWindow : Window
     {
-        private MainViewModel _view;
+        private ViewModelBase _view;
 
-        public MainWindow()
+        //Kode til at flytte Title Bar og Resize vindue.
+        //Stjæler Windows OS'ets indbyggede funktion til at tracke en application vindue resolution.
+            [DllImport("user32.dll")]
+            public static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
+
+            //Lader en dragge et vindue ved at snyde Windows til at tro at man dragger på default title baren, hvorimod et stackpanel bliver brugt istedet
+            private void pnlControlBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+            {
+                WindowInteropHelper helper = new WindowInteropHelper(this);
+                SendMessage(helper.Handle, 161,2,0);
+            }
+
+            //Vær gang at vinduet er resized nedsætter den max height så vinduet ikke overtager taskbaren for neden (Tænk på en fullscreen youtube video)
+            private void pnlControlBar_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+            {
+                this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            }
+
+
+        //Lukker Vindue
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            _view = new MainViewModel(new ProductRepository());
-            DataContext = _view;
+            Application.Current.Shutdown();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //Minimizer vindue
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            _view.CurrentView = new PackagingView();
+            this.WindowState = WindowState.Minimized;
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        //Maximizer vindue
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            _view.CurrentView = new ProductView();
-        }
-        
-        
-        //Lader en dragge vinduet rundt når man holder venstre museknap nede
-        [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
-
-        private void pnlControlBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            WindowInteropHelper helper = new WindowInteropHelper(this);
-            SendMessage(helper.Handle, 161,2,0);
-        }
-
-        private void pnlControlBar_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            if (this.WindowState == WindowState.Normal)
+                this.WindowState = WindowState.Maximized;
+            else this.WindowState = WindowState.Normal;
         }
     }
 }

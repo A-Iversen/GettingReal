@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Input;
 using GettingReal.Model;
 using GettingReal.Repository;
 using GettingReal.View;
 using GettingReal.ViewModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Controls;
+using System.Windows.Input;
 namespace GettingReal;
 
 
-public class MainViewModel : INotifyPropertyChanged
+public class ViewModelBase : INotifyPropertyChanged
 {
     private readonly IProductRepository _repository;
     private string _productName;
@@ -20,38 +18,8 @@ public class MainViewModel : INotifyPropertyChanged
     private double _width;
     private bool _isFragile;
     private List<Product> _products;
-    private readonly ProductView _productView = new ProductView();
-    private readonly PackagingView _packagingView = new PackagingView();
 
-    public MainViewModel(IProductRepository productRepository)
-    {
-        _repository = productRepository;
-        Products = new List<Product>(_repository.GetAllProducts());
-
-        ShowInventoryCommand = new RelayCommand(() =>
-        {
-            CurrentView = _productView;
-        });
-
-        ShowPackagingCommand = new RelayCommand(() =>
-        {
-            CurrentView = _packagingView;
-        });
-        //Sætter view til inventory ved start
-        CurrentView = _productView;
-    }
-    private UserControl _currentView;
-    public UserControl CurrentView
-    {
-        get => _currentView;
-        set
-        {
-            _currentView = value;
-            OnPropertyChanged();
-        }
-    }
-
-
+    //Properties for product(Tror jeg, i skal blive bedre til at kategorisere kode med comments >:( )
     public List<Product> Products
     {
         get => _products;
@@ -127,6 +95,8 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
+
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -134,9 +104,8 @@ public class MainViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    // Public parameterless constructor
-    
 
+    // Public parameterless constructor
     public void SaveProduct()
     {
         var product = new Product

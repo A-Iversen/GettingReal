@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:GettingReal.View">
-
+   
     <!--Border Highlight Gradient-->
     <Color x:Key="WindowHightlightColor1">#2C87AD</Color>
     <Color x:Key="WindowHightlightColor2">#1B2838</Color>
@@ -10,49 +10,27 @@
     <!--TopPanel-->
     <Color x:Key="TopPanel1">#0F131F</Color>
     <Color x:Key="TopPanel2">#111724</Color>
-
     <!--LeftPanel-->
     <Color x:Key="LeftPanel1">#1D2C42</Color>
     <Color x:Key="LeftPanel2">#223447</Color>
-
     <!--RightPanel-->
     <Color x:Key="RightPanel1">#16212E</Color>
     <Color x:Key="RightPanel2">#1B2838</Color>
+    
+    <!--Menu ButtonColor-->
+    <SolidColorBrush x:Key="IconBaseColor" Color="White" />
+    <SolidColorBrush x:Key="MouseOverColor" Color="#385B70" />
+    <SolidColorBrush x:Key="SelectedColor" Color="#0A0C14" />
+    
+    <!--Control Bar ButtonColor-->
+    <SolidColorBrush x:Key="BottonCloseColor" Color="#FF85E9FF"/>
+    <SolidColorBrush x:Key="BottonMaximizeColor" Color="#FF85E9FF"/>
+    <SolidColorBrush x:Key="BottonMinimizeColor" Color="#FF85E9FF"/>
 
-    <!-- Navigation Button Style -->
-    <Style x:Key="NavButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#D6E9FF" />
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Padding" Value="10,5" />
-        <Setter Property="Margin" Value="5" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <!-- Add CornerRadius using a ControlTemplate -->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        CornerRadius="5">
-                        <ContentPresenter HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <!-- Skifter baggrundsfarve for knap baseret på CurrentView værdi -->
-            <DataTrigger Binding="{Binding CurrentView}" Value="{x:Type local:ProductView}">
-                <Setter Property="Background" Value="#4A90E2" />
-                <Setter Property="Foreground" Value="White" />
-            </DataTrigger>
-            <!-- Skifter baggrundsfarve for knap baseret på CurrentView værdi -->
-            <DataTrigger Binding="{Binding CurrentView}" Value="{x:Type local:PackagingView}">
-                <Setter Property="Background" Value="#4A90E2" />
-                <Setter Property="Foreground" Value="White" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
+    <!--Basic test palette-->
+    <SolidColorBrush x:Key="Color1" Color="#FF85E9FF" />
+    <SolidColorBrush x:Key="Color2" Color="#FF5EF1C0" />
+    <SolidColorBrush x:Key="Color3" Color="#FF5DE3E3" />
+    <SolidColorBrush x:Key="Color4" Color="#FF1768B1" />
 
 </ResourceDictionary>

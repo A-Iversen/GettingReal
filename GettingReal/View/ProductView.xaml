@@ -6,82 +6,10 @@
            xmlns:local="clr-namespace:GettingReal.View"
            mc:Ignorable="d" 
            d:DesignHeight="450" d:DesignWidth="700"
-           Background="Transparent">
+           Background="MediumPurple">
            
-    
-    
-    <Border CornerRadius="10" BorderThickness="2">
+
+    <Grid>
         
-
-
-        <Grid>
-           
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="250"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!--Vesntre menu-->
-            <Border Grid.Column="0" Grid.Row="1">
-
-                <Border CornerRadius="0,0,0,10">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1" >
-                            <GradientStop Color="{StaticResource LeftPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource LeftPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                </Border>
-            </Border>
-
-
-            <!--Top menu-->
-            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-
-                <Border CornerRadius="10,10,0,0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1" >
-                            <GradientStop Color="{StaticResource TopPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource TopPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                </Border>
-            </Border>
-
-
-            <!--Højre menu-->
-            <Border Grid.Column="1" Grid.Row="1">
-
-                <Border CornerRadius="0,0,10,0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
-                            <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
-                            <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <StackPanel Margin="10">
-                        <Button Content="Remove Product" 
-                                Command="{Binding RemoveProductCommand}" 
-                                CommandParameter="{Binding SelectedProductName}" 
-                                Width="120" Height="30"/>
-                        <Button Content="Save Changes" 
-                                Command="{Binding EditProductCommand}" 
-                                CommandParameter="{Binding SelectedProduct}" 
-                                Width="120" Height="30"/>
-                    </StackPanel>
-                </Border>
-
-
-            </Border>
-
-        </Grid>
-
-    </Border>
-       
-    
+    </Grid>   
 </UserControl>

@@ -1,56 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Input;
+using FontAwesome.Sharp;
 using GettingReal.Model;
 using GettingReal.Repository;
-using GettingReal.View;
 using GettingReal.ViewModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 namespace GettingReal;
 
 
-public class MainViewModel : INotifyPropertyChanged
+public class MainViewModel : ViewModelBase
 {
-    private readonly IProductRepository _repository;
+    //Fields og Properties for Product
     private string _productName;
     private double _length;
     private double _height;
     private double _width;
     private bool _isFragile;
     private List<Product> _products;
-    private readonly ProductView _productView = new ProductView();
-    private readonly PackagingView _packagingView = new PackagingView();
 
-    public MainViewModel(IProductRepository productRepository)
-    {
-        _repository = productRepository;
-        Products = new List<Product>(_repository.GetAllProducts());
-
-        ShowInventoryCommand = new RelayCommand(() =>
-        {
-            CurrentView = _productView;
-        });
-
-        ShowPackagingCommand = new RelayCommand(() =>
-        {
-            CurrentView = _packagingView;
-        });
-        //Sætter view til inventory ved start
-        CurrentView = _productView;
-    }
-    private UserControl _currentView;
-    public UserControl CurrentView
-    {
-        get => _currentView;
-        set
-        {
-            _currentView = value;
-            OnPropertyChanged();
-        }
-    }
-
+    private readonly IProductRepository _repository;
 
     public List<Product> Products
     {
@@ -127,16 +95,54 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+//Fields og Properties for viewChange
+    private ViewModelBase _currentChildView;
+    private string _caption;
+    private IconChar _icon;
 
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public ViewModelBase CurrentChildView
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        get => _currentChildView;
+        set
+        {
+            _currentChildView = value;
+            OnPropertyChanged(nameof(CurrentChildView));
+        }
     }
 
-    // Public parameterless constructor
-    
+    //Commands
+    public ICommand ShowProductViewCommand { get; }
+    public ICommand ShowPackagingViewCommand { get; }
 
+    public MainViewModel()
+    {
+        //Initiliaze commands
+        ShowProductViewCommand = new RelayCommand(ExecuteShowProductViewCommand);
+        ShowPackagingViewCommand = new RelayCommand(ExecuteShowPackagingViewCommand);
+
+        //Default View
+        ExecuteShowPackagingViewCommand(null);
+    }
+
+    private void ExecuteShowPackagingViewCommand(object obj)
+    {
+        CurrentChildView = new PackagingViewModel();
+    }
+
+    private void ExecuteShowProductViewCommand(object obj)
+    {
+        CurrentChildView = new ProductViewModel();
+    }
+
+
+
+
+
+
+
+    //Det her skal puttes over i en PackagingViewModel >:(
+
+    // Public parameterless constructor
     public void SaveProduct()
     {
         var product = new Product
@@ -161,7 +167,6 @@ public class MainViewModel : INotifyPropertyChanged
         Width = 0;
         IsFragile = false;
     }
-    public ICommand ShowInventoryCommand { get; }
-    public ICommand ShowPackagingCommand { get; }
-
+    
+    
 }

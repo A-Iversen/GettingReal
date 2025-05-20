@@ -69,7 +69,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource IconBaseColor}"
-                                 Command="{Binding ShowPackagingCommand}">
+                                 Command="{Binding ShowPackagingViewCommand}">
                         <StackPanel>
                            <fa:IconImage Icon="BoxesPacking" Style="{StaticResource menuButtonIcon}"/>
                        </StackPanel>
@@ -93,21 +93,23 @@
 
            
            <!--Right Section-->
-           <Border Grid.Column="1" Grid.Row="1"
-                   CornerRadius="0,0,10,0">
-               <Border.Background>
-                   <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1" >
-                       <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
-                       <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
-                   </LinearGradientBrush>
-               </Border.Background>
+            <Border Grid.Column="1" Grid.Row="1" CornerRadius="0,0,10,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
+                        <GradientStop Color="{StaticResource RightPanel1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
+                
+                
                
-               
-           </Border>
+            </Border>
            
-           
-           
-           <!--Topbar-->
+
+
+
+            <!--Topbar-->
            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" >
                <Grid>
                    <Grid.RowDefinitions>
@@ -129,21 +131,21 @@
                        <Button x:Name="btnClose"
                                Style="{StaticResource controlButton}"
                                Tag="{StaticResource BottonCloseColor}"
-                               Click="btnClose_Click">
+                               Click="BtnClose_Click">
                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
                        </Button>
                        <!--Maximize Button-->
                        <Button x:Name="btnMaximize"
                                Style="{StaticResource controlButton}"
                                Tag="{StaticResource BottonMaximizeColor}"
-                               Click="btnMaximize_Click">
+                               Click="BtnMaximize_Click">
                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                        </Button>
                        <!--Minimize Button-->
                        <Button x:Name="btnMinimize"
                                Style="{StaticResource controlButton}"
                                Tag="{StaticResource BottonMinimizeColor}"
-                               Click="btnMinimize_Click">
+                               Click="BtnMinimize_Click">
                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
                        </Button>
 

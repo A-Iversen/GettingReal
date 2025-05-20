@@ -9,6 +9,7 @@ namespace GettingReal
 {
     public partial class MainWindow : Window
     {
+
         private MainViewModel _view;
 
         //Kode til at flytte Title Bar og Resize vindue.
@@ -31,21 +32,26 @@ namespace GettingReal
 
 
         //Lukker Vindue
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
         //Minimizer vindue
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
         //Maximizer vindue
-        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
             if (this.WindowState == WindowState.Normal)
                 this.WindowState = WindowState.Maximized;
             else this.WindowState = WindowState.Normal;
+        }
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

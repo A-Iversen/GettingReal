@@ -2,12 +2,17 @@ using FontAwesome.Sharp;
 using GettingReal.Model;
 using GettingReal.Repository;
 using GettingReal.ViewModel;
+using GettingReal.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 namespace GettingReal;
+using GettingReal.Helpers;
 
-
+/// <summary>
+/// MainViewModel.cs håndterer logikken bag MainWindow.xaml og indeholder alle properties og commands der bruges i MainWindow.xaml
+/// -A
+/// </summary>
 public class MainViewModel : ViewModelBase
 {
     //Fields og Properties for Product
@@ -95,7 +100,10 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-//Fields og Properties for viewChange
+    public bool IsProductViewVisible => CurrentChildView is ProductViewModel;
+    public bool IsPackagingViewVisible => CurrentChildView is PackagingViewModel;
+
+    //Fields og Properties for viewChange
     private ViewModelBase _currentChildView;
     private string _caption;
     private IconChar _icon;
@@ -105,8 +113,13 @@ public class MainViewModel : ViewModelBase
         get => _currentChildView;
         set
         {
-            _currentChildView = value;
-            OnPropertyChanged(nameof(CurrentChildView));
+            if (_currentChildView != value)
+            {
+                _currentChildView = value;
+                OnPropertyChanged(nameof(CurrentChildView));
+                OnPropertyChanged(nameof(IsProductViewVisible));
+                OnPropertyChanged(nameof(IsPackagingViewVisible));
+            }
         }
     }
 
@@ -121,7 +134,7 @@ public class MainViewModel : ViewModelBase
         ShowPackagingViewCommand = new RelayCommand(ExecuteShowPackagingViewCommand);
 
         //Default View
-        ExecuteShowPackagingViewCommand(null);
+        
     }
 
     private void ExecuteShowPackagingViewCommand(object obj)

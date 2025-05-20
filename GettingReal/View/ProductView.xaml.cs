@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GettingReal.ViewModel;
 
 namespace GettingReal.View
 {
@@ -23,6 +24,8 @@ namespace GettingReal.View
         public ProductView()
         {
             InitializeComponent();
+            // Sætter DataContexten til en ny version af ProductViewModel så den ordentligt forbinder bindings til UI
+            DataContext = new ProductViewModel();
         }
     }
 }

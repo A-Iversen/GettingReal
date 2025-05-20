@@ -1,15 +1,11 @@
-﻿<UserControl x:Class="GettingReal.View.ProductView"
-           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-           xmlns:local="clr-namespace:GettingReal.View"
-           mc:Ignorable="d" 
-           d:DesignHeight="450" d:DesignWidth="700"
-           Background="MediumPurple">
-           
+﻿<UserControl
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="GettingReal.View.ProductView"
+          av:DesignHeight="276.272" av:DesignWidth="490.053">
 
-    <Grid>
+
+    <Grid Height="141" Width="340">
         
-    </Grid>   
+
+    </Grid>
 </UserControl>

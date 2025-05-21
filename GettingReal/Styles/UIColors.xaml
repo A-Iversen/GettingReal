@@ -6,7 +6,7 @@
     <Color x:Key="WindowHightlightColor1">#2C87AD</Color>
     <Color x:Key="WindowHightlightColor2">#1B2838</Color>
 
-    <!--Foreground Colors-->
+    <!--Background Colors-->
     <!--TopPanel-->
     <Color x:Key="TopPanel1">#0F131F</Color>
     <Color x:Key="TopPanel2">#111724</Color>
@@ -16,21 +16,23 @@
     <!--RightPanel-->
     <Color x:Key="RightPanel1">#16212E</Color>
     <Color x:Key="RightPanel2">#1B2838</Color>
-    
+
+
+    <!--UI Element Colors-->
     <!--Menu ButtonColor-->
     <SolidColorBrush x:Key="IconBaseColor" Color="White" />
     <SolidColorBrush x:Key="MouseOverColor" Color="#385B70" />
     <SolidColorBrush x:Key="SelectedColor" Color="#0A0C14" />
     
     <!--Control Bar ButtonColor-->
-    <SolidColorBrush x:Key="BottonCloseColor" Color="#FF85E9FF"/>
+    <SolidColorBrush x:Key="BottonCloseColor" Color="#FFFF8181"/>
     <SolidColorBrush x:Key="BottonMaximizeColor" Color="#FF85E9FF"/>
     <SolidColorBrush x:Key="BottonMinimizeColor" Color="#FF85E9FF"/>
 
     <!--Basic test palette-->
-    <SolidColorBrush x:Key="Color1" Color="#FF85E9FF" />
-    <SolidColorBrush x:Key="Color2" Color="#FF5EF1C0" />
-    <SolidColorBrush x:Key="Color3" Color="#FF5DE3E3" />
-    <SolidColorBrush x:Key="Color4" Color="#FF1768B1" />
+    <SolidColorBrush x:Key="Color1" Color="Orange" />
+    <SolidColorBrush x:Key="Color2" Color="Red" />
+    <SolidColorBrush x:Key="Color3" Color="Blue" />
+    <SolidColorBrush x:Key="Color4" Color="Pink" />
 
 </ResourceDictionary>

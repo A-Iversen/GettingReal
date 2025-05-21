@@ -95,53 +95,6 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-//Fields og Properties for viewChange
-    private ViewModelBase _currentChildView;
-    private string _caption;
-    private IconChar _icon;
-
-    public ViewModelBase CurrentChildView
-    {
-        get => _currentChildView;
-        set
-        {
-            _currentChildView = value;
-            OnPropertyChanged(nameof(CurrentChildView));
-        }
-    }
-
-    //Commands
-    public ICommand ShowProductViewCommand { get; }
-    public ICommand ShowPackagingViewCommand { get; }
-
-    public MainViewModel()
-    {
-        //Initiliaze commands
-        ShowProductViewCommand = new RelayCommand(ExecuteShowProductViewCommand);
-        ShowPackagingViewCommand = new RelayCommand(ExecuteShowPackagingViewCommand);
-
-        //Default View
-        ExecuteShowPackagingViewCommand(null);
-    }
-
-    private void ExecuteShowPackagingViewCommand(object obj)
-    {
-        CurrentChildView = new PackagingViewModel();
-    }
-
-    private void ExecuteShowProductViewCommand(object obj)
-    {
-        CurrentChildView = new ProductViewModel();
-    }
-
-
-
-
-
-
-
-    //Det her skal puttes over i en PackagingViewModel >:(
-
     // Public parameterless constructor
     public void SaveProduct()
     {

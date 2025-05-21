@@ -46,7 +46,8 @@
                <RowDefinition Height="*"/>
            </Grid.RowDefinitions>
 
-           <!--Top Section-->
+           
+           <!--Top Section (Navigation)-->
            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                    CornerRadius="10,10,0,0" Margin="0,0,0,-1">
                <Border.Background>
@@ -56,8 +57,9 @@
                    </LinearGradientBrush>
                </Border.Background>
            
-               <!--Navigation Menu-->
+               <!--Navigation buttons-->
                <StackPanel Orientation="Horizontal">
+                   
                    <RadioButton Style="{StaticResource menuButton}"
                                 Tag="{StaticResource IconBaseColor}"
                                 IsChecked="True"
@@ -74,12 +76,12 @@
                            <fa:IconImage Icon="BoxesPacking" Style="{StaticResource menuButtonIcon}"/>
                        </StackPanel>
                    </RadioButton>
+                   
                </StackPanel>
-
            </Border>
 
            
-           <!--Left Section-->
+           <!--Left Section (DataGrid)-->
            <Border Grid.Column="0" Grid.Row="1"
                    CornerRadius="0,0,0,10">
                <Border.Background>
@@ -88,11 +90,26 @@
                        <GradientStop Color="{StaticResource LeftPanel2}" Offset="1"/>
                    </LinearGradientBrush>
                </Border.Background>
-               
+
+                <Grid>
+                   <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                </Grid>
+                 
+                
+
+                   
+                   
            </Border>
 
            
-           <!--Right Section-->
+           <!--Right Section (Controls)-->
            <Border Grid.Column="1" Grid.Row="1"
                    CornerRadius="0,0,10,0">
                <Border.Background>
@@ -101,7 +118,7 @@
                        <GradientStop Color="{StaticResource RightPanel2}" Offset="1"/>
                    </LinearGradientBrush>
                </Border.Background>
-               
+
                
            </Border>
            

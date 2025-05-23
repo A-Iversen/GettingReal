@@ -2,33 +2,35 @@
 using GettingReal.Model;
 using GettingReal.ViewModel;
 using System.Windows.Input;
+using System.Collections.Generic;
 
-public class PackagingViewModel : ViewModelBase
+namespace GettingReal.ViewModel
 {
-    public ViewModelBase CurrentChildView { get; set; }
-    public ICommand ShowProductViewCommand { get; }
-    public ICommand ShowPackagingViewCommand { get; }
-
-    public List<Packaging> Packagings { get; set; }
-    public string PackagingName { get; set; }
-
-    public PackagingViewModel()
+    public class PackagingViewModel : ViewModelBase
     {
-        ShowProductViewCommand = new RelayCommand(ExecuteShowProductViewCommand);
-        ShowPackagingViewCommand = new RelayCommand(ExecuteShowPackagingViewCommand);
-    }
+        public ViewModelBase CurrentChildView { get; set; }
+        public ICommand ShowProductViewCommand { get; }
+        public ICommand ShowPackagingViewCommand { get; }
 
-    private void ExecuteShowProductViewCommand(object obj)
-    {
-        
-        CurrentChildView = new ProductViewModel();
-        OnPropertyChanged(nameof(CurrentChildView));
-    }
+        public List<GettingReal.Model.Packaging> Packagings { get; set; }
+        public string PackagingName { get; set; }
 
-    private void ExecuteShowPackagingViewCommand(object obj)
-    {
-        
-        CurrentChildView = new PackagingViewModel();
-        OnPropertyChanged(nameof(CurrentChildView));
+        public PackagingViewModel()
+        {
+            ShowProductViewCommand = new RelayCommand(ExecuteShowProductViewCommand);
+            ShowPackagingViewCommand = new RelayCommand(ExecuteShowPackagingViewCommand);
+        }
+
+        private void ExecuteShowProductViewCommand(object obj)
+        {
+            CurrentChildView = new ProductViewModel();
+            OnPropertyChanged(nameof(CurrentChildView));
+        }
+
+        private void ExecuteShowPackagingViewCommand(object obj)
+        {
+            CurrentChildView = new PackagingViewModel();
+            OnPropertyChanged(nameof(CurrentChildView));
+        }
     }
 }

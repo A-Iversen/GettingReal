@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using GettingReal.Model;
 
 namespace GettingReal.Repository
@@ -15,9 +14,8 @@ namespace GettingReal.Repository
         // Constructor - initializes the repository with a file path
         public ProductRepository()
         {
-            // Save File
-string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-_filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            _filePath = Path.Combine(appDataPath, "GettingReal", "products.txt");
             
             // Ensure the directory exists
             Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
@@ -33,8 +31,19 @@ _filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
             {
                 if (File.Exists(_filePath))
                 {
-                    string json = File.ReadAllText(_filePath);
-                    _products = JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
+                    var lines = File.ReadAllLines(_filePath);
+                    _products = lines.Select(line =>
+                    {
+                        var parts = line.Split(',');
+                        return new Product
+                        {
+                            Name = parts[0],
+                            Length = double.Parse(parts[1]),
+                            Height = double.Parse(parts[2]),
+                            Width = double.Parse(parts[3]),
+                            Fragile = bool.Parse(parts[4])
+                        };
+                    }).ToList();
                 }
             }
             catch (Exception ex)
@@ -50,8 +59,8 @@ _filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
         {
             try
             {
-                string json = JsonSerializer.Serialize(_products, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_filePath, json);
+                var lines = _products.Select(p => $"{p.Name},{p.Length},{p.Height},{p.Width},{p.Fragile}");
+                File.WriteAllLines(_filePath, lines);
             }
             catch (Exception ex)
             {
@@ -87,7 +96,7 @@ _filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
                 product.Length = updatedProduct.Length;
                 product.Height = updatedProduct.Height;
                 product.Width = updatedProduct.Width;
-                product.IsFragile = updatedProduct.IsFragile;
+                product.Fragile = updatedProduct.Fragile;
                 SaveProducts();
             }
         }

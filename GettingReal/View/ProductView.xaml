@@ -86,8 +86,10 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                            <GridViewColumn Header="SKU" DisplayMemberBinding="{Binding SKU}" />
+                            <GridViewColumn Header="Length" DisplayMemberBinding="{Binding Length}" />
+                            <GridViewColumn Header="Height" DisplayMemberBinding="{Binding Height}" />
+                            <GridViewColumn Header="Width" DisplayMemberBinding="{Binding Width}" />
+                            <GridViewColumn Header="Fragile" DisplayMemberBinding="{Binding Fragile}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -44,7 +44,7 @@ namespace GettingReal.ViewModel
             var sb = new StringBuilder();
             foreach (var product in Products)
             {
-                sb.AppendLine($"{product.Name},{product.Category},{product.SKU}");
+                sb.AppendLine($"{product.Name},{product.Length},{product.Height},{product.Width},{product.Fragile}");
             }
             File.WriteAllText(ProductsFilePath, sb.ToString());
         }

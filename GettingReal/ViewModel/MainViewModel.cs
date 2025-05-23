@@ -22,7 +22,7 @@ public class MainViewModel : ViewModelBase
     private double _length;
     private double _height;
     private double _width;
-    private bool _isFragile;
+    private bool _fragile;
     private List<Product> _products;
 
     private readonly IProductRepository _repository;
@@ -82,14 +82,14 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public bool IsFragile
+    public bool Fragile
     {
-        get => _isFragile;
+        get => _fragile;
         set
         {
-            if (_isFragile != value)
+            if (_fragile != value)
             {
-                _isFragile = value;
+                _fragile = value;
                 OnPropertyChanged();
             }
         }

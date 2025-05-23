@@ -7,13 +7,14 @@ using System.Windows.Interop;
 using System.Windows.Controls;
 using GettingReal.Model;
 using GettingReal.Helpers;
+using System.Collections.Generic;
 
 namespace GettingReal.View
 {
     public partial class ProductView : Window
     {
-
         private MainViewModel _view;
+        private readonly ProductViewModel _productViewModel;
 
         //Kode til at flytte Title Bar og Resize vindue.
         //Stjæler Windows OS'ets indbyggede funktion til at tracke en application vindue resolution.
@@ -54,7 +55,9 @@ namespace GettingReal.View
         public ProductView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            _view = new MainViewModel();
+            _productViewModel = new ProductViewModel();
+            DataContext = _view;
         }
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -64,6 +67,8 @@ namespace GettingReal.View
                 if (DataContext is MainViewModel vm && dialog.Product != null)
                 {
                     vm.Products.Add(dialog.Product);
+                    _productViewModel.Products = new List<Product>(vm.Products);
+                    _productViewModel.SaveProductsToFile();
                 }
             }
         }
@@ -77,9 +82,17 @@ namespace GettingReal.View
                 {
                     // Update the selected product's properties
                     selectedProduct.Name = dialog.Product.Name;
-                    selectedProduct.Category = dialog.Product.Category;
-                    selectedProduct.SKU = dialog.Product.SKU;
-                    // If Product implements INotifyPropertyChanged, the UI will update automatically
+                    selectedProduct.Length = dialog.Product.Length;
+                    selectedProduct.Height = dialog.Product.Height;
+                    selectedProduct.Width = dialog.Product.Width;
+                    selectedProduct.Fragile = dialog.Product.Fragile;
+                    
+                    // Save changes
+                    if (DataContext is MainViewModel vm)
+                    {
+                        _productViewModel.Products = new List<Product>(vm.Products);
+                        _productViewModel.SaveProductsToFile();
+                    }
                 }
             }
             else
@@ -98,6 +111,8 @@ namespace GettingReal.View
                     if (DataContext is MainViewModel vm)
                     {
                         vm.Products.Remove(selectedProduct);
+                        _productViewModel.Products = new List<Product>(vm.Products);
+                        _productViewModel.SaveProductsToFile();
                     }
                 }
             }

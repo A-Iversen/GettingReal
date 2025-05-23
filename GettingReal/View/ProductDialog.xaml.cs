@@ -20,9 +20,10 @@ namespace GettingReal.View
             Product = new Product
             {
                 Name = productToEdit.Name,
-                Category = productToEdit.Category,
-                SKU = productToEdit.SKU
-                // Copy other properties as needed
+                Length = productToEdit.Length,
+                Height = productToEdit.Height,
+                Width = productToEdit.Width,
+                Fragile = productToEdit.Fragile
             };
             DataContext = Product;
         }

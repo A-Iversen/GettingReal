@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using GettingReal.Model;
 
@@ -9,112 +8,95 @@ namespace GettingReal.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly string _filePath;
+        private string _filePath;
         private List<Product> _products;
 
-        // Constructor - initializes the repository with a file path
         public ProductRepository()
         {
-            // Save File
-string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-_filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
+            // Save file in Documents folder
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            _filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
             
-            // Ensure the directory exists
+            Console.WriteLine($"File path: {_filePath}");
+            
+            // Create folder if it doesn't exist
             Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
             
+            // Initialize empty list
             _products = new List<Product>();
+            
+            // Load existing products
             LoadProducts();
         }
 
-        // Load products from file
         private void LoadProducts()
         {
-            try
+            if (File.Exists(_filePath))
             {
-                if (File.Exists(_filePath))
+                Console.WriteLine("File exists, trying to load products");
+                string json = File.ReadAllText(_filePath);
+                Console.WriteLine($"Loaded JSON: {json}");
+                
+                if (!string.IsNullOrEmpty(json))
                 {
-                    string json = File.ReadAllText(_filePath);
-                    _products = JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
+                    _products = JsonSerializer.Deserialize<List<Product>>(json);
+                    Console.WriteLine($"Loaded {_products.Count} products");
+                }
+                else
+                {
+                    Console.WriteLine("File is empty");
+                    _products = new List<Product>();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error loading products: {ex.Message}");
+                Console.WriteLine("File does not exist");
                 _products = new List<Product>();
             }
         }
 
-
-        // Save products to file
         private void SaveProducts()
         {
-            try
-            {
-                string json = JsonSerializer.Serialize(_products, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_filePath, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving products: {ex.Message}");
-            }
+            string json = JsonSerializer.Serialize(_products);
+            Console.WriteLine($"Saving JSON: {json}");
+            File.WriteAllText(_filePath, json);
         }
 
-
-        // IProductRepository
-        public void AddProduct(Product product)
+        public void Add(Product product)
         {
             _products.Add(product);
             SaveProducts();
         }
 
+        public void Edit(Product product)
+        {
+            // Find the product by name
+            for (int i = 0; i < _products.Count; i++)
+            {
+                if (_products[i].Name == product.Name)
+                {
+                    _products[i] = product;
+                    SaveProducts();
+                    break;
+                }
+            }
+        }
+
+        public void Delete(Product product)
+        {
+            _products.Remove(product);
+            SaveProducts();
+        }
+
         public List<Product> GetAllProducts()
         {
-            return _products.ToList();
+            return _products;
         }
 
         public void ClearProducts()
         {
             _products.Clear();
             SaveProducts();
-        }
-
-        public void EditProduct(string productName, Product updatedProduct)
-        {
-            var product = _products.FirstOrDefault(p => p.Name == productName);
-            if (product != null)
-            {
-                product.Name = updatedProduct.Name;
-                product.Length = updatedProduct.Length;
-                product.Height = updatedProduct.Height;
-                product.Width = updatedProduct.Width;
-                product.IsFragile = updatedProduct.IsFragile;
-                SaveProducts();
-            }
-        }
-
-        public void RemoveProduct(string productName)
-        {
-            var product = _products.FirstOrDefault(p => p.Name == productName);
-            if (product != null)
-            {
-                _products.Remove(product);
-                SaveProducts();
-            }
-        }
-
-        public void Add(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Edit(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Product product)
-        {
-            throw new NotImplementedException();
         }
     }
 }

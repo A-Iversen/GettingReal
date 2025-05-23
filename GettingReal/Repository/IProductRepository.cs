@@ -5,8 +5,12 @@ namespace GettingReal.Repository
 {
     public interface IProductRepository
     {
-        // Add a new product
-        void AddProduct(Product product);
+        void Add(Product product);
+
+        void Edit(Product product);
+
+        void Delete(Product product);
+
 
         // Get all products
         List<Product> GetAllProducts();

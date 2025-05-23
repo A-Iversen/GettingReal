@@ -101,5 +101,20 @@ _filePath = Path.Combine(documentsPath, "GettingReal", "products.json");
                 SaveProducts();
             }
         }
+
+        public void Add(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Product product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

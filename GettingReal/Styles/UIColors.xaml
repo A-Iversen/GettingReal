@@ -23,7 +23,7 @@
     <SolidColorBrush x:Key="SelectedColor" Color="#0A0C14" />
     
     <!--Control Bar ButtonColor-->
-    <SolidColorBrush x:Key="BottonCloseColor" Color="#FF85E9FF"/>
+    <SolidColorBrush x:Key="BottonCloseColor" Color="#FFFF8181"/>
     <SolidColorBrush x:Key="BottonMaximizeColor" Color="#FF85E9FF"/>
     <SolidColorBrush x:Key="BottonMinimizeColor" Color="#FF85E9FF"/>
 

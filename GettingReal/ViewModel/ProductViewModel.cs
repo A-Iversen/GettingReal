@@ -1,27 +1,53 @@
-﻿using System.ComponentModel;
+﻿using GettingReal.Model;
+using GettingReal.Repository;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace GettingReal.ViewModel
 {
-    
     public class ProductViewModel : ViewModelBase
     {
-        private string _selectedOption = string.Empty;
-        public string SelectedOption
+        private List<Product> _products;
+        public List<Product> Products
         {
-            get => _selectedOption;
+            get => _products;
             set
             {
-                if (_selectedOption != value)
+                if (_products != value)
                 {
-                    _selectedOption = value;
-                    OnPropertyChanged(nameof(SelectedOption));
+                    _products = value;
+                    OnPropertyChanged(nameof(Products));
                 }
             }
         }
 
-        // Eksempel på knapperne med muligheder
-        public string[] Options { get; } = { "Option1", "Option2", "Option3" };
+        private readonly IProductRepository _repository;
 
-        
+        public ProductViewModel()
+        {
+            _repository = new ProductRepository(); // Or inject via constructor
+            Products = _repository.GetAllProducts();
+        }
+        private string ProductsFilePath
+        {
+            get
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string folder = Path.Combine(appDataPath, "GettingReal");
+                Directory.CreateDirectory(folder); // Ensure the folder exists
+                return Path.Combine(folder, "products.txt");
+            }
+        }
+        public void SaveProductsToFile()
+        {
+            var sb = new StringBuilder();
+            foreach (var product in Products)
+            {
+                sb.AppendLine($"{product.Name},{product.Category},{product.SKU}");
+            }
+            File.WriteAllText(ProductsFilePath, sb.ToString());
+        }
     }
+
 }

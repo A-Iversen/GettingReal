@@ -7,10 +7,12 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 namespace GettingReal;
+
+using System.Collections.ObjectModel;
 using GettingReal.Helpers;
 
 /// <summary>
-/// MainViewModel.cs håndterer logikken bag MainWindow.xaml og indeholder alle properties og commands der bruges i MainWindow.xaml
+/// MainViewModel.cs håndterer logikken bag ProductView.xaml og indeholder alle properties og commands der bruges i Prow.xaml
 /// -A
 /// </summary>
 public class MainViewModel : ViewModelBase
@@ -25,15 +27,8 @@ public class MainViewModel : ViewModelBase
 
     private readonly IProductRepository _repository;
 
-    public List<Product> Products
-    {
-        get => _products;
-        private set
-        {
-            _products = value;
-            OnPropertyChanged();
-        }
-    }
+
+    public ObservableCollection<Product> Products { get; set; } = new();
 
     public string ProductName
     {
@@ -153,33 +148,7 @@ public class MainViewModel : ViewModelBase
 
 
 
-    //Det her skal puttes over i en PackagingViewModel >:(
-
-    // Public parameterless constructor
-    public void SaveProduct()
-    {
-        var product = new Product
-        {
-            Name = ProductName,
-            Length = Length,
-            Height = Height,
-            Width = Width,
-            IsFragile = IsFragile
-        };
-
-        _repository.AddProduct(product);
-        Products = new List<Product>(_repository.GetAllProducts());
-        ClearInputFields();
-    }
-
-    private void ClearInputFields()
-    {
-        ProductName = string.Empty;
-        Length = 0;
-        Height = 0;
-        Width = 0;
-        IsFragile = false;
-    }
+   
     
     
 }

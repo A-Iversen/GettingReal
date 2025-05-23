@@ -74,6 +74,13 @@ namespace GettingReal.Model
             set { _width = value; onPropertyChanged(); }
         }
 
+        private double _height;
+        public double Height
+        {
+            get => _height;
+            set { _height = value; onPropertyChanged(); }
+        }
+
         // Tilføjet af PU mht Packaging
         /// <summary>
         /// Fragility buffer in cm (e.g. 0.5 or 1.0)
@@ -84,18 +91,11 @@ namespace GettingReal.Model
         /// <summary>
         /// Total dimensions including buffer on each side
         /// </summary>
-        [JsonIgnore]
+        /// 
         public (double L, double H, double W) DimensionsWithBuffer
             => (Length + FragilityBuffer * 2,
                 Height + FragilityBuffer * 2,
                 Width + FragilityBuffer * 2);
-
-        // Constructor - Automatic
-        public Product()
-        {
-            get => _height;
-            set { _height = value; onPropertyChanged(); }
-        }
 
         private bool _fragile;
         public bool Fragile

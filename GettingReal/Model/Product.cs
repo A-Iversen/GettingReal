@@ -1,7 +1,9 @@
 ﻿using GettingReal.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GettingReal.Model
 {
@@ -72,8 +74,24 @@ namespace GettingReal.Model
             set { _width = value; onPropertyChanged(); }
         }
 
-        private double _height;
-        public double Height
+        // Tilføjet af PU mht Packaging
+        /// <summary>
+        /// Fragility buffer in cm (e.g. 0.5 or 1.0)
+        /// </summary>
+        public double FragilityBuffer { get; set; }
+
+        // Tilføjet af PU mht Packaging
+        /// <summary>
+        /// Total dimensions including buffer on each side
+        /// </summary>
+        [JsonIgnore]
+        public (double L, double H, double W) DimensionsWithBuffer
+            => (Length + FragilityBuffer * 2,
+                Height + FragilityBuffer * 2,
+                Width + FragilityBuffer * 2);
+
+        // Constructor - Automatic
+        public Product()
         {
             get => _height;
             set { _height = value; onPropertyChanged(); }
